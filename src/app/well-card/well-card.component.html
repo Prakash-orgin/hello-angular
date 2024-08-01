@@ -1,0 +1,117 @@
+@if(data.hasOperatingCondition){
+<div class="h-full w-full bg-[#2e363f]">
+  <mat-grid-tile-header class="!bg-[#2e363f] !pt-4">
+    <mat-grid-list class="h-full w-full" cols="2" gutterSize="20">
+      <mat-grid-tile>
+        <div class="w-[80%] flex-shrink-0">
+          <p class="capitalize">{{ data.colOne.title }}</p>
+        </div>
+        <div class="flex items-center gap-5 justify-end w-[20%] flex-shrink-0">
+          @if(isFullScreen){
+          <mat-icon
+            class="scale-105 text-gray-400 h-max cursor-pointer"
+            (click)="setIsFullScreen(false)"
+            >fullscreen_exit</mat-icon
+          >
+          }@else{
+          <mat-icon
+            class="scale-105 text-gray-400 h-max cursor-pointer"
+            (click)="setIsFullScreen(true)"
+            >zoom_out_map</mat-icon
+          >
+          }
+          <mat-icon class="scale-105 text-gray-400 h-max">logout</mat-icon>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="w-[90%]">
+          <p class="capitalize">{{ data.colTwo.title }}</p>
+        </div>
+        <div class="w-[10%]">
+          <mat-icon class="scale-105 text-gray-400 h-max">more_horiz</mat-icon>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-grid-tile-header>
+  <div class="h-full w-full">
+    <mat-grid-list class="h-full w-full" cols="2" gutterSize="20">
+      <mat-grid-tile class="h-full w-full">
+        <div class="flex flex-col justify-center items-center">
+          <mat-icon class="scale-125 text-gray-400 h-max">error</mat-icon>
+
+          <p class="text-gray-400">{{ data?.colOne?.data?.message }}</p>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile class="h-full w-full">
+        <div class="w-full p-4 mt-5">
+          <table
+            mat-table
+            [dataSource]="dataSource"
+            class="!bg-transparent !text-gray-400 !border-2 !border-gray-400 !border-solid"
+          >
+            <ng-container
+              [matColumnDef]="column"
+              class=""
+              *ngFor="let column of displayedColumns"
+            >
+              <th
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+                class="capitalize !text-gray-400"
+              >
+                {{ column }}
+              </th>
+              <td mat-cell *matCellDef="let element" class="!text-gray-400">
+                {{ getElementData(element, column) }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
+} @else{
+<div class="h-full w-full bg-[#2e363f]">
+  <mat-grid-tile-header
+    class="flex justify-between items-center !bg-[#2e363f] !pt-4"
+  >
+    <div class="w-[80%]">
+      <p class="capitalize">{{ data.title }}</p>
+    </div>
+    <div class="flex items-center gap-5 justify-end w-[20%]">
+      @if(isFullScreen){
+      <mat-icon
+        class="scale-105 text-gray-400 h-max cursor-pointer"
+        (click)="setIsFullScreen(false)"
+        >fullscreen_exit</mat-icon
+      >
+      }@else{
+      <mat-icon
+        class="scale-105 text-gray-400 h-max cursor-pointer"
+        (click)="setIsFullScreen(true)"
+        >zoom_out_map</mat-icon
+      >
+      }
+      <mat-icon class="scale-105 text-gray-400 h-max">logout</mat-icon>
+    </div>
+  </mat-grid-tile-header>
+  <div class="h-full flex justify-center items-center">
+    <canvas
+      class="w-[80%] h-[80%]"
+      baseChart
+      width=""
+      height=""
+      [type]="'line'"
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+    >
+    </canvas>
+  </div>
+</div>
+}
