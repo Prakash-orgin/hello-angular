@@ -19,7 +19,12 @@
       </mat-date-range-picker>
     </mat-form-field>
   </div>
-  <mat-grid-list cols="2" rowHeight="2:1.5" gutterSize="30">
+  <mat-grid-list
+    [cols]="breakpoint"
+    rowHeight="2:1.5"
+    gutterSize="30"
+    (window:resize)="onResize($event)"
+  >
     @for (data of wellCardsData; track data.title) {
     <mat-grid-tile class="flex justify-center items-center">
       <app-well-card class="w-full h-full" [data]="data"></app-well-card>

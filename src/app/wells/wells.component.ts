@@ -26,6 +26,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WellsComponent {
+  breakpoint!: number;
+
   wellCardsData = [
     {
       hasOperatingCondition: true,
@@ -116,4 +118,11 @@ export class WellsComponent {
       },
     },
   ];
+  ngOnInit() {
+    this.breakpoint = window.innerWidth <= 922 ? 1 : 2;
+  }
+
+  onResize(event: any) {
+    this.breakpoint = event.target.innerWidth <= 922 ? 1 : 2;
+  }
 }
