@@ -3,19 +3,21 @@
   <mat-grid-tile-header class="!bg-[#2e363f] !pt-4">
     <mat-grid-list class="h-full w-full" cols="2" gutterSize="20">
       <mat-grid-tile>
-        <div class="w-[80%] flex-shrink-0">
-          <p class="capitalize">{{ data.colOne.title }}</p>
+        <div class="w-[70%]">
+          <p class="capitalize text-ellipsis whitespace-nowrap overflow-hidden">
+            {{ data.colOne.title }}
+          </p>
         </div>
-        <div class="flex items-center gap-5 justify-end w-[20%] flex-shrink-0">
+        <div class="flex items-center gap-5 justify-end w-[30%]">
           @if(isFullScreen){
           <mat-icon
-            class="scale-105 text-gray-400 h-max cursor-pointer"
+            class="scale-105 text-gray-400 h-max cursor-pointer flex-shrink-0"
             (click)="setIsFullScreen(false)"
             >fullscreen_exit</mat-icon
           >
           }@else{
           <mat-icon
-            class="scale-105 text-gray-400 h-max cursor-pointer"
+            class="scale-105 text-gray-400 h-max cursor-pointer flex-shrink-0"
             (click)="setIsFullScreen(true)"
             >zoom_out_map</mat-icon
           >
@@ -25,7 +27,9 @@
       </mat-grid-tile>
       <mat-grid-tile>
         <div class="w-[90%]">
-          <p class="capitalize">{{ data.colTwo.title }}</p>
+          <p class="capitalize text-ellipsis whitespace-nowrap overflow-hidden">
+            {{ data.colTwo.title }}
+          </p>
         </div>
         <div class="w-[10%]">
           <mat-icon class="scale-105 text-gray-400 h-max">more_horiz</mat-icon>
@@ -33,21 +37,22 @@
       </mat-grid-tile>
     </mat-grid-list>
   </mat-grid-tile-header>
-  <div class="h-full w-full">
+  <div class="h-full w-full py-3">
     <mat-grid-list class="h-full w-full" cols="2" gutterSize="20">
       <mat-grid-tile class="h-full w-full">
         <div class="flex flex-col justify-center items-center">
           <mat-icon class="scale-125 text-gray-400 h-max">error</mat-icon>
-
           <p class="text-gray-400">{{ data?.colOne?.data?.message }}</p>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile class="h-full w-full">
-        <div class="w-full p-4 mt-5">
+      <mat-grid-tile class="h-full w-full relative">
+        <div
+          class="w-full h-full overflow-y-scroll scale-95 !mt-6 !pb-6 absolute top-4 left-0"
+        >
           <table
             mat-table
             [dataSource]="dataSource"
-            class="!bg-transparent !text-gray-400 !border-2 !border-gray-400 !border-solid"
+            class="!bg-transparent !text-gray-400 !border-2 !border-gray-400 !border-solid h-full w-full"
           >
             <ng-container
               [matColumnDef]="column"
